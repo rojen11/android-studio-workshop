@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">FirstProject</string>
+    <string name="submit">Submit</string>
+    <string name="relative_layout">Relative Layout</string>
+    <string name="linear_layout">Linear Layout</string>
+    <string name="frame_layout">Frame Layout</string>
+    <string name="table_layout">Table Layout</string>
+    <string name="event_handling">Event Handling</string>
 </resources>
