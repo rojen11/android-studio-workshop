@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
         Button frameButton = findViewById(R.id.frameButton);
         Button tableButton = findViewById(R.id.tableButton);
         Button eventButton = findViewById(R.id.eventButton);
+        Button listViewButton = findViewById(R.id.listViewButton);
+        Button cardViewSpinnerButton = findViewById(R.id.cardSpinnerView);
+        Button recyclerViewButton = findViewById(R.id.recyclerViewButton);
 
         relativeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LinearLayout.class);
+                intent.putExtra("destination", "Linear layout passed from intent.");
                 startActivity(intent);
             }
         });
@@ -61,6 +65,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        listViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ListViewExample.class);
+                startActivity(intent);
+            }
+        });
+
+        cardViewSpinnerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CardViewSpinner.class);
+                startActivity(intent);
+            }
+        });
+
+        recyclerViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RecyclerView.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

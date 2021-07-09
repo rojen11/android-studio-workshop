@@ -6,4 +6,15 @@
     <string name="frame_layout">Frame Layout</string>
     <string name="table_layout">Table Layout</string>
     <string name="event_handling">Event Handling</string>
+    <string name="list_view">List View</string>
+    <string name="card_spinner_view">Card Spinner View</string>
+    <string name="recycler_view">Recycler View</string>
+
+    <string-array name="names">
+        <item>John</item>
+        <item>Shiba</item>
+        <item>Bruno</item>
+        <item>Rojen</item>
+        <item>Aron</item>
+    </string-array>
 </resources>
