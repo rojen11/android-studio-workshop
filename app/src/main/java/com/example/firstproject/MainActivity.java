@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         Button cardViewSpinnerButton = findViewById(R.id.cardSpinnerView);
         Button recyclerViewButton = findViewById(R.id.recyclerViewButton);
         Button fragmentNavButton = findViewById(R.id.fragmentNavButton);
+        Button bookRecyclerViewButton = findViewById(R.id.bookRecyclerView);
 
         relativeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +95,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, NavigationHost.class);
+                startActivity(intent);
+            }
+        });
+
+        bookRecyclerViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, BookActivity.class);
                 startActivity(intent);
             }
         });
