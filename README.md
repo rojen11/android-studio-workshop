@@ -6,7 +6,6 @@
 <br>
 
 ## Screenshots
-<hr>
 
 <br>
 
