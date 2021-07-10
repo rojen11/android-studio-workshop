@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.FirstProject">
-        <activity android:name=".BookDetail"></activity>
+        <activity android:name=".MovieNavHost"></activity>
+        <activity android:name=".BookDetail" />
         <activity android:name=".BookActivity" />
         <activity android:name=".NavigationHost" />
         <activity android:name=".RecyclerView" />

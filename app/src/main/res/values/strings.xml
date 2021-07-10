@@ -21,4 +21,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="bookRecyclerView">Book Recycler View</string>
+    <string name="movie_title">Title</string>
+    <string name="movie_description">Description</string>
+    <string name="movie_released_year">Release Year</string>
+    <string name="movie">Movie</string>
+    <string name="movie_released_date">Release Date</string>
 </resources>
