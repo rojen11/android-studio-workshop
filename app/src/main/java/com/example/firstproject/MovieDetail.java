@@ -3,10 +3,15 @@ package com.example.firstproject;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +28,8 @@ public class MovieDetail extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private MovieViewModel viewModel;
 
     public MovieDetail() {
         // Required empty public constructor
@@ -59,6 +66,28 @@ public class MovieDetail extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movie_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_movie_detail, container, false);
+
+        viewModel = new ViewModelProvider(requireActivity()).get(MovieViewModel.class);
+
+        // Get elements from xml
+        TextView title = view.findViewById(R.id.movieDetailTitle);
+        TextView description = view.findViewById(R.id.movieDetailDescription);
+        TextView releasedDate = view.findViewById(R.id.movieDetailReleasedDate);
+        TextView director = view.findViewById(R.id.movieDetailDirector);
+
+        ImageView image = view.findViewById(R.id.movieDetailImage);
+
+        // Set details of form
+        title.setText(viewModel.getMovieTitle());
+        description.setText(viewModel.getMovieDescription());
+        releasedDate.setText(viewModel.getMovieReleaseYear());
+        director.setText(viewModel.getMovieDirector());
+
+        if (viewModel.getMovieImageUrl() != null) {
+            Glide.with(view).asBitmap().load(viewModel.getMovieImageUrl()).into(image);
+        }
+
+        return view;
     }
 }
