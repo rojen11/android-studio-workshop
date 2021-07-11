@@ -29,4 +29,5 @@
     <string name="seond_assignment">Second Assignment</string>
     <string name="movie_director">Director</string>
     <string name="movie_image">Image Url</string>
+    <string name="web_view_example">Web View Example</string>
 </resources>

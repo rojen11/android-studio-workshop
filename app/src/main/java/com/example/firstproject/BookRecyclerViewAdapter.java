@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -72,6 +73,39 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
             TransitionManager.beginDelayedTransition(holder.parent);
             holder.expandedRelLayout.setVisibility(View.VISIBLE);
             holder.downArrow.setVisibility(View.GONE);
+
+            System.out.println(context.getClass().equals(BookActivity.class));
+
+            if (context.getClass().equals(BookActivity.class)) {
+                holder.bookDeleteButton.setVisibility(View.GONE);
+            } else if (context.getClass().equals(AlreadyReadBookActivity.class)) {
+                holder.bookDeleteButton.setVisibility(View.VISIBLE);
+                holder.bookDeleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (Utils.getInstance(context).deleteFromAlreadyReadBooks(books.get(position))) {
+                            Toast.makeText(context, "Successfully deleted!", Toast.LENGTH_LONG).show();
+                            setBooks(Utils.getInstance(context).getAlreadyReadBooks());
+                        } else {
+                            Toast.makeText(context, "Something went wrong! Please try again.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+            } else if (context.getClass().equals(CurrentlyReadingBooks.class)) {
+                holder.bookDeleteButton.setVisibility(View.VISIBLE);
+                holder.bookDeleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (Utils.getInstance(context).deleteFromCurrentlyReadingBooks(books.get(position))) {
+                            Toast.makeText(context, "Successfully deleted!", Toast.LENGTH_LONG).show();
+                            setBooks(Utils.getInstance(context).getCurrentlyReading());
+                        } else {
+                            Toast.makeText(context, "Something went wrong! Please try again.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+            }
+
         }else {
             TransitionManager.beginDelayedTransition(holder.parent);
             holder.expandedRelLayout.setVisibility(View.GONE);
@@ -98,6 +132,7 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         private ImageView downArrow, upArrow;
         private RelativeLayout expandedRelLayout;
         private TextView textAuthor, textShortDescription;
+        private TextView bookDeleteButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -110,6 +145,8 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
             expandedRelLayout = itemView.findViewById(R.id.expandedRelLayout);
             textAuthor = itemView.findViewById(R.id.authorTextValue);
             textShortDescription = itemView.findViewById(R.id.textShortDescriptionValue);
+            bookDeleteButton = itemView.findViewById(R.id.bookDeleteButton);
+
 
             downArrow.setOnClickListener(new View.OnClickListener() {
                 @Override

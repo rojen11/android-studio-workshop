@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         Button fragmentNavButton = findViewById(R.id.fragmentNavButton);
         Button bookRecyclerViewButton = findViewById(R.id.bookRecyclerView);
         Button secondAssigmentButton = findViewById(R.id.secondAssignmentButton);
+        Button webViewButton = findViewById(R.id.webViewButton);
 
         relativeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,5 +117,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        webViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, WebViewExample.class);
+                startActivity(intent);
+            }
+        });
     }
 }
