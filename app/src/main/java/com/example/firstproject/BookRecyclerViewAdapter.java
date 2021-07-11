@@ -1,5 +1,6 @@
 package com.example.firstproject;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.transition.TransitionManager;
@@ -8,18 +9,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
+
+import static com.example.firstproject.DetailBookActivity.BOOK_ID_KEY;
 
 
 public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerViewAdapter.ViewHolder> {
@@ -33,7 +36,7 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         this.context = context;
     }
 
-    @NotNull
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_book, parent, false);
@@ -52,9 +55,10 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, books.get(position).getName() + " Selected", Toast.LENGTH_LONG).show();
-
-                Intent intent = new Intent(context, BookDetail.class);
+//                Toast.makeText(context, books.get(position).getName() + " Selected", Toast.LENGTH_LONG).show();
+                // context -> BookActivity
+                Intent intent = new Intent(context, DetailBookActivity.class);
+                intent.putExtra(BOOK_ID_KEY, books.get(position).getId());
                 context.startActivity(intent);
             }
         });
@@ -64,21 +68,20 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         holder.textShortDescription.setText(books.get(position).getShortDesc());
 
         // Expanded Card UI logic
-        if (books.get(position).isExpanded()) {
+        if(books.get(position).isExpanded()){
             TransitionManager.beginDelayedTransition(holder.parent);
             holder.expandedRelLayout.setVisibility(View.VISIBLE);
             holder.downArrow.setVisibility(View.GONE);
-        } else {
+        }else {
             TransitionManager.beginDelayedTransition(holder.parent);
             holder.expandedRelLayout.setVisibility(View.GONE);
             holder.downArrow.setVisibility(View.VISIBLE);
         }
-
     }
 
     @Override
     public int getItemCount() {
-        return this.books.size();
+        return books.size();
     }
 
     public void setBooks(ArrayList<Book> books) {
@@ -93,17 +96,17 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         private TextView textName;
 
         private ImageView downArrow, upArrow;
-        private View expandedRelLayout;
+        private RelativeLayout expandedRelLayout;
         private TextView textAuthor, textShortDescription;
 
-
-        public ViewHolder(@NonNull @NotNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             parent = itemView.findViewById(R.id.bookCardViewParent);
             imageBook = itemView.findViewById(R.id.imgBook);
             textName = itemView.findViewById(R.id.textBookName);
+
             downArrow = itemView.findViewById(R.id.expandCardButton);
-            upArrow = itemView.findViewById(R.id.CollapseCardButton);
+            upArrow = itemView.findViewById(R.id.collapseCardButton);
             expandedRelLayout = itemView.findViewById(R.id.expandedRelLayout);
             textAuthor = itemView.findViewById(R.id.authorTextValue);
             textShortDescription = itemView.findViewById(R.id.textShortDescriptionValue);
@@ -125,6 +128,9 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
                     notifyItemChanged(getAdapterPosition());
                 }
             });
+
+
+
         }
     }
 }
